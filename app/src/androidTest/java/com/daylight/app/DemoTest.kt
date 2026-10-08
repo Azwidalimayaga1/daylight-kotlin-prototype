@@ -40,6 +40,7 @@ class DemoTest {
         val email="demo${System.currentTimeMillis()}@daylight.example"
         pause(3500)
         tap(MainActivity.AUTH_TOGGLE)
+        ui { assertTrue(activity.findViewById<EditText>(MainActivity.PASSWORD).transformationMethod is android.text.method.PasswordTransformationMethod) }
         fill(MainActivity.NAME,"Alex"); pause(900); fill(MainActivity.EMAIL,email); pause(900); fill(MainActivity.PASSWORD,"SmallSteps2026!"); pause(2500)
         tap(MainActivity.SUBMIT); waitFor(MainActivity.SETTINGS); pause(3500)
         tap(MainActivity.HABIT_FIRST); pause(3000)

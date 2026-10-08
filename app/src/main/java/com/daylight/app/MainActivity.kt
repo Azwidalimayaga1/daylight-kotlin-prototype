@@ -94,6 +94,9 @@ class MainActivity : Activity() {
         add(text(label, 13f, muted, true), bottom = 6)
         return EditText(this).apply {
             id = identifier; setText(value); hint = label; inputType = kind; setSingleLine(); textSize = 16f
+            if (kind and InputType.TYPE_MASK_VARIATION == InputType.TYPE_TEXT_VARIATION_PASSWORD) {
+                transformationMethod = android.text.method.PasswordTransformationMethod.getInstance()
+            }
             setTextColor(ink); setHintTextColor(muted); background = background(cardColor, 14)
             setPadding(dp(16), dp(14), dp(16), dp(14)); minHeight = dp(54)
         }.also { add(it, bottom = 16) }
