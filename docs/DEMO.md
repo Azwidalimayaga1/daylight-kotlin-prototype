@@ -31,9 +31,9 @@ This script installs the prototype and test APK, clears **only the Daylight app'
 After starting the API and configuring `adb reverse`, use the phone's built-in screen recorder or:
 
 ```powershell
-adb -s YOUR_SERIAL shell screenrecord --time-limit 180 /sdcard/daylight-demo.mp4
+adb -s YOUR_SERIAL shell screenrecord --time-limit 180 /data/local/tmp/daylight-demo.mp4
 # Complete the checklist while recording; stop the command with Ctrl+C.
-adb -s YOUR_SERIAL pull /sdcard/daylight-demo.mp4 .\daylight-demo.mp4
+adb -s YOUR_SERIAL pull /data/local/tmp/daylight-demo.mp4 .\daylight-demo.mp4
 ```
 
 Use only demonstration credentials. Keep other apps and personal notifications out of the recording.

@@ -10,7 +10,7 @@ if ($LASTEXITCODE -ne 0) { throw 'App installation failed.' }
 if ($LASTEXITCODE -ne 0) { throw 'Test APK installation failed.' }
 & $adb -s $Device shell pm clear com.daylight.app
 if ($LASTEXITCODE -ne 0) { throw 'Could not reset demonstration app.' }
-$capture=Start-Process -FilePath $adb -ArgumentList '-s',$Device,'shell','screenrecord','--bit-rate','4000000','--time-limit','180','/sdcard/daylight-demo.mp4' -WindowStyle Hidden -PassThru
+$capture=Start-Process -FilePath $adb -ArgumentList '-s',$Device,'shell','screenrecord','--bit-rate','4000000','--time-limit','180','/data/local/tmp/daylight-demo.mp4' -WindowStyle Hidden -PassThru
 Start-Sleep -Seconds 2
 try {
     $result=& $adb -s $Device shell am instrument -w -e class com.daylight.app.DemoTest com.daylight.app.test/androidx.test.runner.AndroidJUnitRunner
@@ -19,5 +19,5 @@ try {
 } finally {
     & $adb -s $Device shell pkill -2 screenrecord
     $capture.WaitForExit(10000) | Out-Null
-    & $adb -s $Device pull /sdcard/daylight-demo.mp4 $OutputPath
+    & $adb -s $Device pull /data/local/tmp/daylight-demo.mp4 $OutputPath
 }

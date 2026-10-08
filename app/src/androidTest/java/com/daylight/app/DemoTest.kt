@@ -36,6 +36,7 @@ class DemoTest {
     @Test fun completeWalkthrough() {
         val intent=Intent(instrumentation.targetContext,MainActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         activity=instrumentation.startActivitySync(intent) as MainActivity
+        ui { activity.window.addFlags(android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON) }
         val email="demo${System.currentTimeMillis()}@daylight.example"
         pause(3500)
         tap(MainActivity.AUTH_TOGGLE)

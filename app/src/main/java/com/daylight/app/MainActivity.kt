@@ -48,6 +48,7 @@ class MainActivity : Activity() {
     private val paper get() = Color.parseColor(if (dark) "#14251E" else "#F6F5EF")
     private val cardColor get() = Color.parseColor(if (dark) "#20372B" else "#FFFFFF")
     private val green = Color.parseColor("#337D64")
+    private val accent get() = Color.parseColor(if (dark) "#A2D8BA" else "#337D64")
     private val yellow = Color.parseColor("#F3D482")
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -127,7 +128,7 @@ class MainActivity : Activity() {
     }
     private fun home() {
         screen = "home"; dark = user.optBoolean("darkMode"); shell()
-        add(text("YOUR EVERYDAY SPACE", 11f, green, true), bottom = 8)
+        add(text("YOUR EVERYDAY SPACE", 11f, accent, true), bottom = 8)
         add(text("Hello, ${user.optString("displayName")}.", 30f, ink, true), bottom = 8)
         add(text("Progress starts with one small step.", 15f, muted), bottom = 22)
         val count = (0 until habits.length()).count { habits.getJSONObject(it).getBoolean("completed") }
@@ -150,7 +151,7 @@ class MainActivity : Activity() {
                     runOnUiThread { home(); notice("Progress saved to your account.") }
                 }
             }
-            row.gravity = Gravity.START or Gravity.CENTER_VERTICAL; row.setTextColor(if(done) green else ink); add(row)
+            row.gravity = Gravity.START or Gravity.CENTER_VERTICAL; row.setTextColor(if(done) accent else ink); add(row)
         }
         add(button("+  Add a habit", ADD, false) { addHabit() },bottom=18)
         if (user.optBoolean("reminders")) add(text("A gentle nudge: take a minute for yourself today.",13f,muted),bottom=18)
@@ -159,7 +160,7 @@ class MainActivity : Activity() {
     }
     private fun settings() {
         screen = "settings"; dark = user.optBoolean("darkMode"); shell()
-        add(text("MAKE IT YOURS",11f,green,true)); add(text("Your settings",32f,ink,true),bottom=8)
+        add(text("MAKE IT YOURS",11f,accent,true)); add(text("Your settings",32f,ink,true),bottom=8)
         add(text("Your preferences follow your account.",15f,muted),bottom=24)
         val name = input("Display name", NAME, user.getString("displayName"))
         val goal = input("Daily goal · 1 to 10 wins", GOAL, user.getInt("dailyGoal").toString(), InputType.TYPE_CLASS_NUMBER)
