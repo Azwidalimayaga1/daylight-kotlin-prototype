@@ -2,6 +2,8 @@
 
 A small habit tracker demonstrating account registration, login, cryptographically protected credentials, editable account settings, and a REST API backed by SQLite. Both the Android app and the backend are written in **Kotlin**.
 
+Download the APK, runnable backend and labeled emulator video from the [prototype release](https://github.com/Azwidalimayaga1/daylight-kotlin-prototype/releases/tag/v1.0-prototype). See [validation evidence and the remaining physical-phone recording requirement](docs/VALIDATION.md).
+
 ## Assignment requirements
 
 | Requirement | Implementation |
