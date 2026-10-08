@@ -56,6 +56,7 @@ class DemoTest {
         fill(MainActivity.EMAIL,email); fill(MainActivity.PASSWORD,"wrongpassword"); tap(MainActivity.SUBMIT); pause(2000)
         ui { assertTrue(activity.findViewById<TextView>(MainActivity.STATUS).text.toString().contains("incorrect")) }
         fill(MainActivity.PASSWORD,"SmallSteps2026!"); pause(2000); tap(MainActivity.SUBMIT); waitFor(MainActivity.SETTINGS); pause(3000)
+        ui { assertTrue(activity.findViewById<TextView>(MainActivity.HABIT_FIRST).text.toString().startsWith("✓")) }
         tap(MainActivity.SETTINGS); waitFor(MainActivity.SAVE)
         ui {
             assertEquals("Alex Morgan",activity.findViewById<EditText>(MainActivity.NAME).text.toString())

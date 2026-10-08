@@ -13,8 +13,9 @@ if ($LASTEXITCODE -ne 0) { throw 'Could not reset demonstration app.' }
 $capture=Start-Process -FilePath $adb -ArgumentList '-s',$Device,'shell','screenrecord','--bit-rate','4000000','--time-limit','180','/sdcard/daylight-demo.mp4' -WindowStyle Hidden -PassThru
 Start-Sleep -Seconds 2
 try {
-    & $adb -s $Device shell am instrument -w -e class com.daylight.app.DemoTest com.daylight.app.test/androidx.test.runner.AndroidJUnitRunner
-    if ($LASTEXITCODE -ne 0) { throw 'Walkthrough command failed. Inspect instrumentation output.' }
+    $result=& $adb -s $Device shell am instrument -w -e class com.daylight.app.DemoTest com.daylight.app.test/androidx.test.runner.AndroidJUnitRunner
+    $result | Write-Output
+    if ($LASTEXITCODE -ne 0 -or ($result -join "`n") -notmatch 'OK \(1 test\)') { throw 'Walkthrough failed. Inspect instrumentation output.' }
 } finally {
     & $adb -s $Device shell pkill -2 screenrecord
     $capture.WaitForExit(10000) | Out-Null
